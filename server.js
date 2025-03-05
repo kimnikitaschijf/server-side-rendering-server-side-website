@@ -5,7 +5,6 @@ import express from 'express'
 // Importeer de Liquid package (ook als dependency via npm geïnstalleerd)
 import { Liquid } from 'liquidjs';
 
-
 console.log('Hieronder moet je waarschijnlijk nog wat veranderen')
 // Doe een fetch naar de data die je nodig hebt
 // const apiResponse = await fetch('...')
@@ -35,10 +34,47 @@ app.set('views', './views')
 
 // Maak een GET route voor de index (meestal doe je dit in de root, als /)
 app.get('/', async function (request, response) {
+  const webinarUrl =
+    "https://fdnd-agency.directus.app/items/avl_webinars";
+  const webinarUrlFilters = "?fields=title,thumbnail,categories.*.*,speakers.*.*"
+  const webinarsResponse = await fetch(webinarUrl + webinarUrlFilters);
+  const webinarsResponseJSON = await webinarsResponse.json();
+  
+  // const speakersUrl =
+  //   "https://fdnd-agency.directus.app/items/avl_speakers";
+  // const speakersUrlFilters = "?fields=id,fullname,profile_picture"
+  // const speakersResponse = await fetch(speakersUrl + speakersUrlFilters);
+  // const speakersResponseJSON = await speakersResponse.json();
+
+  // webinarsResponseJSON.data.forEach(({ speakers }, i) => {
+  //   webinarsResponseJSON.data[i].speakers = [];
+  //   speakers.forEach(({ avl_speakers_id }, ii) => {
+  //     webinarsResponseJSON.data[i].speakers[ii] = speakersResponseJSON.data.find(({ id }) => id === avl_speakers_id);
+  //   })
+  // })
+  
+  console.log(webinarsResponseJSON.data);
+
    // Render index.liquid uit de Views map
    // Geef hier eventueel data aan mee
-   response.render('index.liquid')
+   response.render('index.liquid', { webinars: webinarsResponseJSON.data })
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Maak een POST route voor de index; hiermee kun je bijvoorbeeld formulieren afvangen
 // Hier doen we nu nog niets mee, maar je kunt er mee spelen als je wilt
