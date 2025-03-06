@@ -2,25 +2,24 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-  }
-  
-  @font-face {
+}
+
+@font-face {
     font-family: "VagRundschrift";
     src: url(/fonts/VAGRundschriftD.ttf) format('truetype');
     font-display: swap;
-  } 
-  
-  @font-face {
+}
+
+@font-face {
     font-family: "Lato";
     src: url(/fonts/Lato-Regular-subset.ttf) format('truetype');
     font-display: swap;
-  } 
-  
-  :root {
+}
+
+:root {
     --font: "Lato", sans-serif;
     --heading-font: "VagRundschrift", sans-serif;
-    /* --heading-font: "Poppins", sans-serif; */
-  
+
     /* ---------- Font sizes ---------- */
     --font-size-xs: 0.5rem;
     --font-size-sm: 0.75rem;
@@ -32,79 +31,108 @@
     --font-size-4xl: 2.5rem;
     --font-size-5xl: 3rem;
     --font-size-6xl: 3.5rem;
-  
+
     /* ---------- Colors: Text ---------- */
     --text-color: #000;
     --alt-text-color: #fff;
-  
+
     /* ---------- Colors: General ---------- */
-    --primary-color: hsl(339, 100%, 21%);
-    --background-color: hsl(338, 27%, 92%);
-    --background-color-alt: hsl(0, 0%, 100%);
-    --background-category-color: hsl(339, 26%, 76%);
-    --hover-state-color: hsl(339, 26%, 80%);
-    --accent-color-1: hsl(340, 100%, 15%);
-  
+    --primary-color: #6b0025;
+    --background-color: #f0e5e9;
+    --background-color-alt: #ffffff;
+    --background-category-color: #d2b2bd;
+    --hover-state-color: #d9bfc8;
+    --accent-color-1: #4d0019;
+
     /* ---------- Paddings ---------- */
     --padding-button: 8px 16px;
     --padding-label: 4px;
-  
+
     /* ---------- Border radius ---------- */
     --border-radius-sm: 6px;
     --border-radius-md: 12px;
     --border-nav: 3px solid var(--primary-color);
-  
+
     /* ---------- Misc ---------- */
     --gap: .5rem;
     --card-max-width: 384px;
     --focus: solid 3px hsl(321, 58%, 55%);
-  }
-  
-  html {
+}
+
+html {
     height: 100vh;
-  }
-  
-  body {
+}
+
+body {
     font-family: var(--font);
     background-color: var(--background-color);
-    /* display: flex;
-    flex-direction: column; */
     min-height: 100vh;
     margin: 0;
-  }
-  
-  main {
+}
+
+main {
     width: 85vw;
     margin: 0 auto;
-  }
-  
-  ul li {
+}
+
+ul li {
     list-style: none;
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
+}
+
+h1,
+h2,
+h3,
+p {
     font-family: var(--heading-font);
+    margin: 0.5em 0em 0.5em 0em;
+}
+
+
+h1 {
+    font-weight: 800;
+    font-size: var(--font-size-2xl);
+}
+
+h2 {
+    font-weight: 600;
+    font-size: var(--font-size-xl);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    font-size: var(--font-size-md);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+h3 {
     font-weight: 400;
-  }
-  
-  :focus {
+    font-size: var(--font-size-lg);
+}
+
+p {
+    font-size: var(--font-size-md);
+    font-weight: 400;
+}
+
+:focus {
     outline: var(--focus);
     border-radius: var(--border-radius-sm);
-  }
-  
-  :focus:not(:focus-visible) {
+}
+
+:focus:not(:focus-visible) {
     outline: 0;
-  }
-  
-  ::placeholder {
+}
+
+::placeholder {
     color: var(--text-color);
-  }
-  
-  button{
+}
+
+button {
     cursor: pointer;
-  }
-  
-  .back-btn {
+}
+
+.back-btn {
     display: inline-flex;
     color: var(--alt-text-color);
     background-color: var(--primary-color);
@@ -118,9 +146,23 @@
     transition: .2s;
     border: transparent;
     cursor: pointer;
-  }
-  
-  .back-btn:hover {
+}
+
+.back-btn:hover {
     background-color: var(--hover-state-color);
-  }
-  
+}
+
+a {
+    text-decoration: none;
+    color: var(--alt-text-color);
+}
+
+/* .nav-item::before {
+    content: "";
+    background-image: url("../assets/home-icon.png");
+    position: relative;
+    height: 2em;
+    width: 2em;
+    background-size: contain;
+    background-repeat: no-repeat;
+} */

@@ -1,56 +1,57 @@
 {% render 'partials/head.liquid' %}
 
-<main>
-    <nav>
-        <a href="#">
-            <img src="/assets/AVL-Logo-white.svg" alt="Antoni van Leeuwenhoek">
-        </a>
-        <a href="#">Home</a>
-        <a href="#">Webinars</a>
-        <a href="#">Contouring</a>
-        <a href="#">Profile</a>
-    </nav>
-
-    <ul class="filter-select-buttons">
+<main id="content">
+    {% comment %} <ul class="filter-select-buttons">
         {% assign unique_categories = "" %}
-    
+
         {% for webinar in webinars %}
-            {% for category in webinar.categories %}
-                {% assign category_name = category.avl_categories_id.name %}
-                
-                {% unless unique_categories contains category_name %}
-                    {% assign unique_categories = unique_categories | append: category_name | append: "," %}
-                {% endunless %}
-            {% endfor %}
+        {% for category in webinar.categories %}
+        {% assign category_name = category.avl_categories_id.name %}
+
+        {% unless unique_categories contains category_name %}
+        {% assign unique_categories = unique_categories | append: category_name | append: "," %}
+        {% endunless %}
         {% endfor %}
-    
+        {% endfor %}
+
         {% assign unique_categories_array = unique_categories | split: "," | sort %}
-    
+
         {% for category in unique_categories_array %}
-            {% if category != "" %}
-                <li><a href="/?category={{ category | url_encode }}">{{ category }}</a></li>
-            {% endif %}
+        {% if category != "" %}
+        <li><a href="/?category={{ category | url_encode }}">{{ category }}</a></li>
+        {% endif %}
         {% endfor %}
-    </ul>
+    </ul> {% endcomment %}
+
+
 
     <h1>Webinars</h1>
     <section class="webinars-container">
+        {% comment %} webinar data inladen {% endcomment %}
         {% for webinar in webinars %}
         <article class="webinar-item">
 
-            <img src="https://fdnd-agency.directus.app/assets/{{ webinar.thumbnail }}" width="150" height="100"
-                style="object-fit: cover" />
-            <p>{{ webinar.title }}</p>
+        {% comment %} thumbnail {% endcomment %}
+            <img src="https://fdnd-agency.directus.app/assets/{{ webinar.thumbnail }}" class="thumbnail-img">
 
+            {% comment %} title {% endcomment %}
+            <h2 class="webinar-title">{{ webinar.title }}</h2>
+
+            {% comment %} speaker {% endcomment %}
             {% for speaker in webinar.speakers %}
-            <p> {{ speaker.avl_speakers_id.fullname }}</p>
+            <p class="speakers-text">{{ speaker.avl_speakers_id.fullname }}</p>
             {% endfor %}
 
+            <p class="date-text">{{ webinar.date }}</p>
+
+            {% comment %} categorie {% endcomment %}
             {% for categories in webinar.categories %}
-            <p> {{ categories.avl_categories_id.name }}</p>
+            <p class="categorie-box">{{ categories.avl_categories_id.name }}</p>
             {% endfor %}
+
         </article>
         {% endfor %}
     </section>
+</main>
 
     {% render 'partials/foot.liquid' %}

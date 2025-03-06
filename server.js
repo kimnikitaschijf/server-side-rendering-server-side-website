@@ -36,7 +36,7 @@ app.set('views', './views')
 app.get('/', async function (request, response) {
   const webinarUrl =
     "https://fdnd-agency.directus.app/items/avl_webinars";
-  const webinarUrlFilters = "?fields=title,thumbnail,categories.*.*,speakers.*.*"
+  const webinarUrlFilters = "?fields=title,thumbnail,date,categories.*.*,speakers.*.*"
   const webinarsResponse = await fetch(webinarUrl + webinarUrlFilters);
   const webinarsResponseJSON = await webinarsResponse.json();
   
