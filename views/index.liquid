@@ -1,7 +1,10 @@
 {% render 'partials/head.liquid' %}
 
 <main id="content">
-    {% comment %} <ul class="filter-select-buttons">
+
+    <h1>Webinars</h1>
+
+    <ul class="filter-select">
         {% assign unique_categories = "" %}
 
         {% for webinar in webinars %}
@@ -18,20 +21,17 @@
 
         {% for category in unique_categories_array %}
         {% if category != "" %}
-        <li><a href="/?category={{ category | url_encode }}">{{ category }}</a></li>
+        <li class="filter-buttons"><a href="/?category={{ category | url_encode }}">{{ category }}</a></li>
         {% endif %}
         {% endfor %}
-    </ul> {% endcomment %}
+    </ul>
 
-
-
-    <h1>Webinars</h1>
     <section class="webinars-container">
         {% comment %} webinar data inladen {% endcomment %}
         {% for webinar in webinars %}
         <article class="webinar-item">
 
-        {% comment %} thumbnail {% endcomment %}
+            {% comment %} thumbnail {% endcomment %}
             <img src="https://fdnd-agency.directus.app/assets/{{ webinar.thumbnail }}" class="thumbnail-img">
 
             {% comment %} title {% endcomment %}
@@ -52,6 +52,7 @@
         </article>
         {% endfor %}
     </section>
+
 </main>
 
-    {% render 'partials/foot.liquid' %}
+{% render 'partials/foot.liquid' %}
