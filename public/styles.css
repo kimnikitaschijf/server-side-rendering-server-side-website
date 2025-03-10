@@ -128,7 +128,7 @@ h1 {
         color: var(--text-color);
         text-decoration: none;
         display: grid;
-        align-items: start;
+        align-items: center;
         justify-items: start;
 
         /* h2 titel van webinars */
