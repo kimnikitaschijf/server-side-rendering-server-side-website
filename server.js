@@ -26,7 +26,7 @@ app.use(express.static('public'))
 
 // Stel Liquid in als 'view engine'
 const engine = new Liquid();
-app.engine('liquid', engine.express()); 
+app.engine('liquid', engine.express());
 
 // Stel de map met Liquid templates in
 // Let op: de browser kan deze bestanden niet rechtstreeks laden (zoals voorheen met HTML bestanden)
@@ -39,7 +39,9 @@ app.get('/', async function (request, response) {
   const webinarUrlFilters = "?fields=title,thumbnail,date,categories.*.*,speakers.*.*"
   const webinarsResponse = await fetch(webinarUrl + webinarUrlFilters);
   const webinarsResponseJSON = await webinarsResponse.json();
-  
+
+  console.log(webinarsResponseJSON.data);
+
   // const speakersUrl =
   //   "https://fdnd-agency.directus.app/items/avl_speakers";
   // const speakersUrlFilters = "?fields=id,fullname,profile_picture"
@@ -52,29 +54,21 @@ app.get('/', async function (request, response) {
   //     webinarsResponseJSON.data[i].speakers[ii] = speakersResponseJSON.data.find(({ id }) => id === avl_speakers_id);
   //   })
   // })
-  
-  console.log(webinarsResponseJSON.data);
 
-   // Render index.liquid uit de Views map
-   // Geef hier eventueel data aan mee
-   response.render('index.liquid', { webinars: webinarsResponseJSON.data })
+  app.get("/webinars/", async function (request, response) {
+    const webinarUrl =
+      "https://fdnd-agency.directus.app/items/avl_webinars";
+    const webinarUrlFilters = "?fields=title,thumbnail,date,categories.*.*,speakers.*.*"
+    const webinarsResponse = await fetch(webinarUrl + webinarUrlFilters);
+    const webinarsResponseJSON = await webinarsResponse.json();
+
+    response.render("webinars.liquid", { webinars: webinarsResponseJSON.data });
+  });
+
+  // Render index.liquid uit de Views map
+  // Geef hier eventueel data aan mee
+  response.render('index.liquid', { webinars: webinarsResponseJSON.data })
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Maak een POST route voor de index; hiermee kun je bijvoorbeeld formulieren afvangen
 // Hier doen we nu nog niets mee, maar je kunt er mee spelen als je wilt
