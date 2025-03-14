@@ -5,23 +5,35 @@
     <h1>Webinars</h1>
 
     <ul class="filter-select">
+        {% comment %} Variabele aanmaken om unieke categorieën op te slaan als een string {% endcomment %}
         {% assign unique_categories = "" %}
 
+        {% comment %} Loop door alle webinars {% endcomment %}
         {% for webinar in webinars %}
+        {% comment %} Loop door de categorieën van elk webinar {% endcomment %}
         {% for category in webinar.categories %}
+        {% comment %} Haal de naam van de categorie op {% endcomment %}
         {% assign category_name = category.avl_categories_id.name %}
 
+        {% comment %} Controleer of de categorie nog niet in de string staat {% endcomment %}
         {% unless unique_categories contains category_name %}
+        {% comment %} Voeg de categorie toe aan de string, gescheiden door een komma {% endcomment %}
         {% assign unique_categories = unique_categories | append: category_name | append: "," %}
         {% endunless %}
         {% endfor %}
         {% endfor %}
 
+        {% comment %} Zet de string om naar een array, split op komma en sorteer alfabetisch {% endcomment %}
         {% assign unique_categories_array = unique_categories | split: "," | sort %}
 
+        {% comment %} Loop door de unieke categorieën en maak filterknoppen aan {% endcomment %}
         {% for category in unique_categories_array %}
+        {% comment %} Controleer of de categorie niet leeg is (kan gebeuren door de laatste komma) {% endcomment %}
         {% if category != "" %}
-        <li class="filter-buttons"><a href="/?category={{ category | url_encode }}">{{ category }}</a></li>
+        <li class="filter-buttons">
+            {% comment %} Maak een link aan die filtert op de categorie {% endcomment %}
+            <a href="/?category={{ category | url_encode }}">{{ category }}</a>
+        </li>
         {% endif %}
         {% endfor %}
     </ul>
@@ -32,7 +44,8 @@
         <article class="webinar-item">
 
             {% comment %} thumbnail {% endcomment %}
-            <img src="https://fdnd-agency.directus.app/assets/{{ webinar.thumbnail }}" class="thumbnail-img">
+            <img src="https://fdnd-agency.directus.app/assets/{{ webinar.thumbnail }}" class="thumbnail-img"
+                alt="Thumbnail van webinar: {{ webinar.title }}">
 
             {% comment %} title {% endcomment %}
             <h2 class="webinar-title">{{ webinar.title }}</h2>
@@ -52,6 +65,7 @@
         </article>
         {% endfor %}
     </section>
+
 
 </main>
 
